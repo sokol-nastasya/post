@@ -1,0 +1,26 @@
+{% extends 'user_post/wrapper.html' %}
+{% load staticfiles %}
+
+{% block main %}
+  <div class="comtainer">
+
+    <h1 class="leftstr">{{ post.title }}</h1>
+    {% if request.user.is_authenticated %}
+    	<h1 class="rightstr"><a href="{% url 'user_post:post_edit' pk=post.pk %}"><i class="fa fa-edit"></i></a></h1>
+    {% endif %}
+    <div style="clear: left;"></div>
+    <hr>
+    <h4>{{ post.descriptions }}</h4>
+    <h5>author: {{ post.author }}</h5>
+
+    <p class="leftstr">
+    	<a href="/posts/add_likes/{{ post.id}}"><img src="{% static 'img/like2.png' %}" width="25px"></a>{{ post.likes }}
+    	<a href="/posts/add_dislike/{{ post.id}}"><img src="{% static 'img/like1.png' %}" width="25px"></a>{{ post.dislike }}
+    </p>
+
+    <span class="rightstr">{{ post.date }}</span>
+    
+
+
+  </div>
+{% endblock %}

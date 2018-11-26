@@ -1,0 +1,12 @@
+{% extends 'user_post/wrapper.html' %}
+{% load staticfiles %}
+
+{% block main %}
+    <h1>New post:</h1>
+    <hr>
+    <form method="POST" class="post-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Save</button>
+    </form>
+{% endblock %}

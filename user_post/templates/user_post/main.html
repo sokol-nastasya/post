@@ -1,0 +1,36 @@
+{% extends 'user_post/wrapper.html' %}
+{% load staticfiles %}
+
+{% block main %}
+	<div class="container main-content">
+		<h1 class="leftstr">Main posts:</h1>
+		{% if request.user.is_authenticated %}
+			<h1 class="rightstr"><a href="{% url 'user_post:post_new' %}" class="top-menu"><i class="fa fa-plus-square-o"></i></a></h1>
+		{% endif %}
+		<div style="clear: left;"></div>
+		<hr>
+		{% for post in post %}
+			<h1><a href="/posts/{{ post.id }}">{{ post.title }}</a></h1>
+			<h4>{{ post.get_short_text }}...</h4>
+			<span>{{ post.date }}</span>
+			<hr>
+		{% endfor %}
+	</div>
+	<div class="paginator">
+		<span class="step-links" style="position: relative; left: 350px;">
+			{% if post.has_previous %}
+				<a href="?page={{ post.previous_page_number }}">&#8592;</a>
+			{% endif %}
+
+			<span class="current">
+					Page {{ post.number }} of {{ post.paginator.num_pages }}.
+			</span>
+
+			{% if post.has_next %}
+				<a href="?page={{ post.next_page_number }}">&#8594;</a>
+			{% endif %}
+		</span>
+	</div>
+
+
+{% endblock %}
